@@ -1,61 +1,63 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
+// import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
 
 
 export const Footer = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.item}>
-                <AntDesign
+                <Ionicons
                     style={styles.buttonScreen}
                     name="calendar"
-                    size={30}
-                    color="#63103e"
+                    size={28}
+                    color="#f7adc3"
                 />
-                <Text style={styles.textFooterActive}>Календарь</Text>
+                {/* <Text style={styles.textFooterActive}>Календарь</Text> */}
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.item}>
-                <AntDesign
+                <Ionicons
                     style={styles.buttonScreen}
-                    name="contacts"
-                    size={30}
-                    color="#bf8290"
+                    name="people"
+                    size={28}
+                    color="#f7adc3"
                 />  
-                <Text style={styles.textFooter}>Контакты</Text>  
+                {/* <Text style={styles.textFooter}>Контакты</Text>   */}
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.item}>
-                <AntDesign
+                <Octicons
                     style={styles.buttonScreen}
-                    name="addusergroup"
-                    size={30}
-                    color="#bf8290"
+                    name="plus"
+                    size={28}
+                    color="#f7adc3"
                     // onPress={() => FormWriteDownClient()}
                 />    
-                <Text style={styles.textFooter}>Запись</Text>
+                {/* <Text style={styles.textFooter}>Запись</Text> */}
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.item}>
-                <AntDesign
+                <Ionicons
                     style={styles.buttonScreen}
-                    name="clockcircleo"
-                    size={30}
-                    color="#bf8290"
+                    name="time"
+                    size={28}
+                    color="#f7adc3"
                     // onPress={() => FormWriteDownClient()}
                 />
-                <Text style={styles.textFooter}>Ожидание</Text>    
+                {/* <Text style={styles.textFooter}>Ожидание</Text>     */}
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.item}>
-                <AntDesign
+                <Ionicons
                     style={styles.buttonScreen}
-                    name="user"
-                    size={30}
-                    color="#bf8290"
+                    name="person-circle"
+                    size={28}
+                    color="#f7adc3"
                 />
-                <Text style={styles.textFooter}>Профиль</Text>  
+                {/* <Text style={styles.textFooter}>Профиль</Text>   */}
             </TouchableOpacity>
         </View>
     );
@@ -68,14 +70,30 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         textAlign: 'center',
+        backgroundColor: 'white',
+        // backgroundColor: "transparent",
 
-        backgroundColor: '#FEE7EB',
+        marginTop: 10,
+        marginLeft: 25,
+        marginRight: 25,
+        marginBottom: 45,
+        paddingTop: 25,
+        paddingBottom: 25,
+        paddingLeft: 6,
+        paddingRight: 6,
 
-        paddingBottom: 34,
-        paddingTop: 12,
+        borderRadius: '50%',
+        borderColor: '#e0e0e0',
+        borderWidth: 4,
 
-        borderColor: '#cf8496',
-        borderTopWidth: 1,
+        shadowColor: "#4a4949",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.15,
+        shadowRadiusBottom: 15,
+        elevation: 5,
     },
 
     item: {
@@ -86,20 +104,20 @@ const styles = StyleSheet.create({
     },
 
     buttonScreen: {
-        marginBottom: 8,
+        // marginBottom: 8,
     },
 
-    textFooter: {
-        fontFamily: 'Raleway-SemiBoldItalic',
-        fontSize: 13,
+    // textFooter: {
+    //     fontFamily: 'Raleway-SemiBoldItalic',
+    //     fontSize: 13,
 
-        color: '#bf8290',
-    },
+    //     color: '#bf8290',
+    // },
 
-    textFooterActive: {
-        fontFamily: 'Raleway-SemiBoldItalic',
-        fontSize: 13,
+    // textFooterActive: {
+    //     fontFamily: 'Raleway-SemiBoldItalic',
+    //     fontSize: 13,
 
-        color: '#63103e',
-    }
+    //     color: '#63103e',
+    // }
 })

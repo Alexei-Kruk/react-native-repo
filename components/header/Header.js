@@ -1,12 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 
 
 export const Header = () => {
     return (
         <View style={styles.container}>
-            <View>
+            <View style={styles.flexHeader}>
                 <Text style={styles.title}>Календарь</Text>
+                <TouchableOpacity>
+                    <Ionicons
+                        style={styles.icon}
+                        name="search"
+                        size={30}
+                        color="#4a4949"
+                    />    
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -15,22 +24,33 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FEE7EB',
+        backgroundColor: 'white',
 
-        borderColor: '#cf8496',
-        borderBottomWidth: 1,
+        // borderColor: '#cf8496',
+        // borderBottomWidth: 1,
+    },
+
+    flexHeader: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        
+        marginTop: 75,
+        marginLeft: 22,
+        marginBottom: 15,
     },
 
     title: {
-        marginTop: 60,
-        marginLeft: 20,
-        marginBottom: 8,
+        fontSize: 32,
+        fontWeight: 400,
+        fontFamily: 'Raleway-Light',
 
-        fontSize: 30,
-        fontWeight: 100,
-        fontFamily: 'Raleway-SemiBoldItalic',
+        color: '#4a4949',
+    },
 
-        color: '#63103e',
+    icon: {
+        marginRight: 22,    
     }
 })
 

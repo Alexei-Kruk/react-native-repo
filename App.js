@@ -25,13 +25,13 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
-		// 'globerthinfree': require('./assets/fonts/globerthinfree.ttf'),
-		// 'Caveat': require('./assets/fonts/Caveat-Regular.ttf'),
-		// 'mt-bold': require('./assets/fonts/Montserrat-Bold.ttf'),
-		// 'mt-light': require('./assets/fonts/Montserrat-Light.ttf'),
-		// 'Raleway-Thin': require('./assets/fonts/Raleway-Thin.ttf'),
-		// 'Raleway-Light': require('./assets/fonts/Raleway-Light.ttf'),
-		// 'Raleway-ExtraLight': require('./assets/fonts/Raleway-ExtraLight.ttf'),
+		'globerthinfree': require('./assets/fonts/globerthinfree.ttf'),
+		'Caveat': require('./assets/fonts/Caveat-Regular.ttf'),
+		'mt-bold': require('./assets/fonts/Montserrat-Bold.ttf'),
+		'mt-light': require('./assets/fonts/Montserrat-Light.ttf'),
+		'Raleway-Thin': require('./assets/fonts/Raleway-Thin.ttf'),
+		'Raleway-Light': require('./assets/fonts/Raleway-Light.ttf'),
+		'Raleway-ExtraLight': require('./assets/fonts/Raleway-ExtraLight.ttf'),
 		'Raleway-Regular': require('./assets/fonts/Raleway-Regular.ttf'),
 		// 'Raleway-ThinItalic': require('./assets/fonts/Raleway-ThinItalic.ttf'),
 		// 'Raleway-LightItalic': require('./assets/fonts/Raleway-LightItalic.ttf'),
@@ -57,6 +57,7 @@ export default function App() {
 
 	if(font) {
 		return (
+			
 			<View style={{flex: 1}}>
 				<StatusBar />
 				<Header />

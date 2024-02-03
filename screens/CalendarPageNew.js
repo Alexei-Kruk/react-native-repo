@@ -8,6 +8,7 @@ import {
     Modal,
     Button,
     TouchableOpacity,
+    FlatList,
 } from "react-native";
 
 import {
@@ -15,9 +16,15 @@ import {
     AgendaEntry,
     AgendaSchedule,
     DateData,
+    ExpandableCalendar,
+    CalendarList,
+    CalendarProvider,
+    AgendaList,
+    WeekCalendar
 } from "react-native-calendars";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { LinearGradient } from 'expo-linear-gradient';
 import events from "../assets/data/events.json";
 import event from "../assets/data/event.json";
 
@@ -28,81 +35,86 @@ export default function CalendarPageNew() {
     const renderItem = (reservation) => {
         return (
             <View style={modalWindowEvent ? styles.blurContent : null}>
-                <View>
-                    <Modal
-                        visible={modalWindowEvent}
-                        items={event}
-                        animationType="slide"
-                        transparent={true}
-                        renderItem={event}
-                        onRequestClose={() => setModalWindowEvent(false)}
-                        presentationStyle="overFullScreen"
+                {/* <LinearGradient
+                    colors={['rgba(0,0,0,0.8)', 'transparent']}
+                    style={styles.background}
+                > */}
+                    <View>
+                        <Modal
+                            visible={modalWindowEvent}
+                            items={event}
+                            animationType="slide"
+                            transparent={true}
+                            renderItem={event}
+                            onRequestClose={() => setModalWindowEvent(false)}
+                            presentationStyle="overFullScreen"
+                        >
+                            <View style={styles.blockItemsModalWindowEvent}>
+                                <View style={styles.titleItem}>
+                                    <Text style={styles.titleModalWindowEvent}>
+                                        Подробнее о клиенте
+                                    </Text>
+                                </View>
+
+                                <View>
+                                    <View style={styles.backgroundModalWindowEvent}>
+                                        <Text style={styles.textModalWindowEvent}>
+                                            {event.name}
+                                        </Text>
+                                        <Text style={styles.textModalWindowEvent}>
+                                            {event.number}
+                                        </Text>
+                                        <Text style={styles.textModalWindowEvent}>
+                                            {event.service}
+                                        </Text>
+                                        <Text style={styles.textModalWindowEvent}>
+                                            {event.comment}
+                                        </Text>
+                                        <Text style={styles.textModalWindowEvent}>
+                                            {event.date}
+                                        </Text>
+                                        <Text style={styles.textModalWindowEvent}>
+                                            {event.time}
+                                        </Text>
+                                    </View>
+
+                                    <View style={styles.buttonItem}>
+                                        <AntDesign
+                                            name="edit"
+                                            size={30}
+                                            color="#63103e"
+                                            style={styles.buttonModalWindowEvent}
+                                        />
+                                        <AntDesign
+                                            name="delete"
+                                            size={30}
+                                            color="#63103e"
+                                            style={styles.buttonModalWindowEvent}
+                                        />
+                                        <AntDesign
+                                            name="closecircleo"
+                                            size={30}
+                                            color="#63103e"
+                                            style={styles.buttonModalWindowEvent}
+                                            onPress={() =>
+                                                setModalWindowEvent(false)
+                                            }
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </Modal>
+                    </View>
+
+                    <Pressable
+                        style={[styles.item, { height: reservation.height }]}
+                        onPress={() => setModalWindowEvent(true)}
                     >
-                        <View style={styles.blockItemsModalWindowEvent}>
-                            <View style={styles.titleItem}>
-                                <Text style={styles.titleModalWindowEvent}>
-                                    Подробнее о клиенте
-                                </Text>
-                            </View>
-
-                            <View>
-                                <View style={styles.backgroundModalWindowEvent}>
-                                    <Text style={styles.textModalWindowEvent}>
-                                        {event.name}
-                                    </Text>
-                                    <Text style={styles.textModalWindowEvent}>
-                                        {event.number}
-                                    </Text>
-                                    <Text style={styles.textModalWindowEvent}>
-                                        {event.service}
-                                    </Text>
-                                    <Text style={styles.textModalWindowEvent}>
-                                        {event.comment}
-                                    </Text>
-                                    <Text style={styles.textModalWindowEvent}>
-                                        {event.date}
-                                    </Text>
-                                    <Text style={styles.textModalWindowEvent}>
-                                        {event.time}
-                                    </Text>
-                                </View>
-
-                                <View style={styles.buttonItem}>
-                                    <AntDesign
-                                        name="edit"
-                                        size={30}
-                                        color="#63103e"
-                                        style={styles.buttonModalWindowEvent}
-                                    />
-                                    <AntDesign
-                                        name="delete"
-                                        size={30}
-                                        color="#63103e"
-                                        style={styles.buttonModalWindowEvent}
-                                    />
-                                    <AntDesign
-                                        name="closecircleo"
-                                        size={30}
-                                        color="#63103e"
-                                        style={styles.buttonModalWindowEvent}
-                                        onPress={() =>
-                                            setModalWindowEvent(false)
-                                        }
-                                    />
-                                </View>
-                            </View>
-                        </View>
-                    </Modal>
-                </View>
-
-                <Pressable
-                    style={[styles.item, { height: reservation.height }]}
-                    onPress={() => setModalWindowEvent(true)}
-                >
-                    <Text style={styles.textItem}>{reservation.name}</Text>
-                    <Text style={styles.textItem}>{reservation.service}</Text>
-                    <Text style={styles.textItem}>{reservation.time}</Text>
-                </Pressable>
+                        <Text style={styles.textItem}>{reservation.name}</Text>
+                        <Text style={styles.textItem}>{reservation.service}</Text>
+                        <Text style={styles.textItem}>{reservation.time}</Text>
+                    </Pressable>
+                {/* </LinearGradient> */}
             </View>
         );
     };
@@ -112,15 +124,29 @@ export default function CalendarPageNew() {
             <Agenda
                 items={events}
                 renderItem={renderItem}
+                loadItemsForMonth={(month) => { 
+                    // Загрузка данных для указанного месяца
+                    // Например, отправка запроса на сервер
+                    // и обновление состояния компонента с полученными данными
+                }}
+                onDayChange={(day) => { 
+                // Обработка изменения выбранной даты
+                // Например, выполнение определенных действий при выборе новой даты
+                }}
+                onCalendarToggled={(isCalendarOpen) => { 
+                    // Обработка открытия или закрытия календаря
+                    // Например, выполнение определенных действий при открытии или закрытии календаря
+                  }}
+                             
                 firstDay={1}
                 theme={{
-                    agendaDayTextColor: "#63103e",
-                    agendaDayNumColor: "#63103e",
-                    agendaTodayColor: "#63103e",
-                    agendaKnobColor: "#63103e",
-                    selectedDayBackgroundColor: "#63103e",
-                    dotColor: "#63103e",
-                    agendaDayNumFontFamily: "Raleway-SemiBoldItalic",
+                    agendaDayTextColor: "#000",
+                    agendaDayNumColor: "#000",
+                    agendaTodayColor: "#000",
+                    agendaKnobColor: "#f7adc3",
+                    selectedDayBackgroundColor: "#f7adc3",
+                    dotColor: "#000",
+                    agendaDayNumFontFamily: 'Raleway-Light',
                 }}
             />
         </View>
@@ -238,7 +264,7 @@ const styles = StyleSheet.create({
     },
 
     textItem: {
-        fontFamily: "Raleway-SemiBoldItalic",
+        fontFamily: 'Raleway-Regular',
         fontSize: 16,
 
         marginLeft: 6,
